@@ -33,25 +33,28 @@ m = {
 	},
 	setMarkers : function(map, loc){
 		var bounds = new google.maps.LatLngBounds();
+		var info = new google.maps.InfoWindow();
 		for (var i=0; i<loc.length; i++){
 			var myLatLng = new google.maps.LatLng(loc[i][0], loc[i][1]);
 			bounds.union(new google.maps.LatLngBounds(myLatLng));
 			var marker = new google.maps.Marker({
 				position:myLatLng,
 				map:map,
-				title:loc[i][2]
+				title:loc[i][2],
+				html:loc[i][2],
 			})
+			google.maps.event.addListener(marker, 'click', function(e) {
+				map.panTo(e.latLng);
+				map.setZoom(15);
+				info.setContent(this.html);
+				info.open(map, this);
+			});
 		}
+		
 		map.fitBounds(bounds);
-	},
-	zoomToViewport : function( locations, map ){
-		console.log(locations)
-		var bounds = new google.maps.LatLngBounds();
-
-		for (var i in locations) {
-			bounds.union(locations[i].geometry.viewport);
-		}
-		map.fitBounds(bounds);
+		google.maps.event.addListener(info,'closeclick',function(e){
+			map.fitBounds(bounds);
+		});
 	},
 	cl : function(){
 		$('.over').click(function(e){
