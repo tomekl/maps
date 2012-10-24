@@ -1,0 +1,7 @@
+/*main style*/
+.modal-body{
+	width:530px;
+	height:500px;
+	position:relative;
+}
+#map-canvas { width:100%; height:100%; }
