@@ -1,7 +1,16 @@
 /*main style*/
 .modal-body{
-	width:530px;
-	height:500px;
+	width:96%;
+	height:800px;
 	position:relative;
+	text-align:center;
 }
-#cnv{text-align:center; }
+.modal{
+	left:0;
+	margin:0;
+	width:100%
+}	
+#cnv img{max-width: inherit;}
+.modal.fade.in{
+	top:15%;
+}
