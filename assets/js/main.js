@@ -34,7 +34,6 @@ m = {
 	setMarkers : function(map, loc){
 		var bounds = new google.maps.LatLngBounds();
 		for (var i=0; i<loc.length; i++){
-			var ppl = loc[i]
 			var myLatLng = new google.maps.LatLng(loc[i][0], loc[i][1]);
 			bounds.union(new google.maps.LatLngBounds(myLatLng));
 			var marker = new google.maps.Marker({
@@ -57,7 +56,6 @@ m = {
 	cl : function(){
 		$('.over').click(function(e){
 			e.preventDefault();
-			$('#cnv').empty();
 			var dt = $(this).data();
 			$('.modal').modal();
 			setTimeout(function() {
@@ -66,7 +64,6 @@ m = {
 		});
 		$('.vid').click(function(e){
 			e.preventDefault();
-			$('#cnv').empty();
 			$('.modal').modal();
 			setTimeout(function() {
 				$(ui.vid).appendTo('#cnv');
@@ -74,11 +71,10 @@ m = {
 		})
 		$('.map_all').click(function(e){
 			e.preventDefault();
-			$('#cnv').empty();
 			$('.modal').modal();
 			setTimeout(function() {
 				m.drop_markers(p);
-			}, 900);
+			}, 300);
 		})
 	}
 	
@@ -89,4 +85,7 @@ ui = {
 }
 $(document).ready(function(){
 	m.cl();
+	$('.modal').on('hide', function () {
+		$('#cnv').empty();
+	})
 })
